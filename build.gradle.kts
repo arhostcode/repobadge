@@ -17,6 +17,14 @@ application {
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
 }
 
+ktor {
+    docker {
+        jreVersion.set(JavaVersion.VERSION_21)
+        localImageName.set("ghcr.io/arhostcode/repo-badge")
+        imageTag.set(version.toString())
+    }
+}
+
 repositories {
     mavenCentral()
     maven("https://jitpack.io")
