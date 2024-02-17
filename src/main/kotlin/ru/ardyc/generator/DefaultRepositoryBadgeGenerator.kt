@@ -10,15 +10,15 @@ import ru.ardyc.utils.substringMaxWithDots
 class DefaultRepositoryBadgeGenerator(private val settings: Settings) : RepositoryBadgeGenerator {
     override fun generate(repository: Repository): SVG {
         val svg = SVG.svg(true) {
-            height = "200"
-            width = "800"
-            viewBox = "0 0 800 200"
+            height = "100"
+            width = "400"
+            viewBox = "0 0 400 100"
 
             attributes["xmlns"] = "http://www.w3.org/2000/svg"
             attributes["xmlns:xlink"] = "http://www.w3.org/1999/xlink"
             createBackground()
             createGithubLogo()
-            text(82, 68, 24, repository.name.substringMaxWithDots(40))
+            text(41, 34, 12, repository.name.substringMaxWithDots(25))
 
             var description = repository.description.splitIntoLines(45)
             if (description.size > 4) {
@@ -27,28 +27,28 @@ class DefaultRepositoryBadgeGenerator(private val settings: Settings) : Reposito
                 }
             }
 
-            lines(82, 100, 16, description)
-            text(450, 43, 20, "Statistics")
+            lines(41, 50, 8, description)
+            text(225, 21, 10, "Statistics")
 
-            createAttribute(500, 70, "Stars earned:", "star", repository.starsCount.toString())
-            createAttribute(500, 92, "Issues/PRs opened:", "cloud", repository.issuesCount.toString())
-            createAttribute(500, 114, "Language:", "letter", repository.language)
-            createAttribute(500, 138, "Watchers:", "watchers", repository.watchersCount.toString())
-            createAttribute(500, 160, "Forks:", "bug", repository.forksCount.toString())
+            createAttribute(250, 35, "Stars earned:", "star", repository.starsCount.toString())
+            createAttribute(250, 46, "Issues/PRs opened:", "cloud", repository.issuesCount.toString())
+            createAttribute(250, 57, "Language:", "letter", repository.language)
+            createAttribute(250, 69, "Watchers:", "watchers", repository.watchersCount.toString())
+            createAttribute(250, 80, "Forks:", "bug", repository.forksCount.toString())
         }
         return svg
     }
 
     private fun Container.createBackground() {
         rect {
-            x = "3.5"
-            y = "3.5"
-            width = "793"
-            height = "193"
-            attributes["rx"] = "41.5"
+            x="1.75"
+            y="1.75"
+            width="396.5"
+            height="96.5"
+            attributes["rx"] = "20.75"
             fill = "white"
             stroke = "black"
-            strokeWidth = "7"
+            strokeWidth = "3.5"
         }
     }
 
@@ -64,8 +64,8 @@ class DefaultRepositoryBadgeGenerator(private val settings: Settings) : Reposito
     }
 
     private fun Container.createAttribute(x: Int, y: Int, description: String, logoId: String, value: String) {
-        text(x, y, 15, description)
-        text(x + 200, y, 15, value)
+        text(x, y, 7, description)
+        text(x + 100, y, 7, value)
         createMiniLogo(logoId)
     }
 
@@ -75,7 +75,7 @@ class DefaultRepositoryBadgeGenerator(private val settings: Settings) : Reposito
             attributes["d"] = settings[id]
             attributes["stroke-linecap"] = "round"
             attributes["stroke-linejoin"] = "round"
-            strokeWidth = "3"
+            strokeWidth = "1.75"
         }
     }
 
