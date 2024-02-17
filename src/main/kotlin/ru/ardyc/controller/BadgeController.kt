@@ -7,7 +7,6 @@ import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import ru.ardyc.render.render
 import ru.ardyc.service.BadgeGenerationService
-import java.net.URL
 
 fun Route.configureBadgeEndpoints() {
     val badgeService: BadgeGenerationService by inject<BadgeGenerationService>()
@@ -16,7 +15,7 @@ fun Route.configureBadgeEndpoints() {
         call.respondTextWriter(contentType = ContentType.parse("image/svg+xml")) {
             append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n")
             badgeService
-                .generate(URL("https://localhost"))
+                .generate(call.request.queryParameters["repository"] ?: "")
                 .render(this)
         }
     }

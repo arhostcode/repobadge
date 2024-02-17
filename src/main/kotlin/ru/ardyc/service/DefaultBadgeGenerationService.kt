@@ -1,19 +1,19 @@
 package ru.ardyc.service
 
 import com.github.nwillc.ksvg.elements.SVG
+import com.github.nwillc.ksvg.elements.SVG.Companion.svg
+import ru.ardyc.client.DefaultGithubClient
+import ru.ardyc.client.GithubClient
 import ru.ardyc.generator.RepositoryBadgeGenerator
-import ru.ardyc.model.Repository
-import java.net.URL
 
-class DefaultBadgeGenerationService(private val repositoryBadgeGenerator: RepositoryBadgeGenerator) : BadgeGenerationService {
-    override fun generate(url: URL): SVG {
-        return repositoryBadgeGenerator.generate(
-            Repository(
-                "arhostcode/linktrackerasdsadasd asd asdfs adfassasdfadf ",
-                "\uD83D\uDEE0\uFE0F Проект Tinkoff Java Course 2 семестр Framework for quickly creating connected applications in Kotlin with minimal effortquickly creating connected applications in Kotlin with minimal effortquickly creating connected applications in Kotlin with minimal effortquickly creating connected applications in Kotlin with minimal effortquickly creating connected applications in Kotlin with minimal effortquickly creating connected applications in Kotlin with minimal effortquickly creating connected applications in Kotlin with minimal effort",
-                500, 50, 5, "Java", 5
-            )
-        )
+class DefaultBadgeGenerationService(private val repositoryBadgeGenerator: RepositoryBadgeGenerator) :
+    BadgeGenerationService {
+
+    private val githubClient: GithubClient = DefaultGithubClient()
+
+    override fun generate(repositoryName: String): SVG {
+        val repository = githubClient.resolveRepository(repositoryName) ?: return svg {}
+        return repositoryBadgeGenerator.generate(repository)
     }
 
 }

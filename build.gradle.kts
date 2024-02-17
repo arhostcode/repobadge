@@ -27,9 +27,12 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
     implementation("io.ktor:ktor-server-netty-jvm")
+    implementation("io.ktor:ktor-client-core")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("io.ktor:ktor-client-jetty:$ktor_version")
     implementation("io.insert-koin:koin-ktor:$ktor_koin_version")
     implementation("com.github.nwillc.ksvg:ksvg:master-SNAPSHOT")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
 }

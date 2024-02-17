@@ -20,7 +20,7 @@ class DefaultRepositoryBadgeGenerator(private val settings: Settings) : Reposito
             createGithubLogo()
             text(41, 34, 12, repository.name.substringMaxWithDots(25))
 
-            var description = repository.description.splitIntoLines(45)
+            var description = repository.description.splitIntoLines(40)
             if (description.size > 4) {
                 description = description.subList(0, 4).apply {
                     add("...")
