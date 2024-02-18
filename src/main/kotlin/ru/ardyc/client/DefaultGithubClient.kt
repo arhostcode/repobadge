@@ -30,7 +30,9 @@ class DefaultGithubClient : GithubClient {
     override fun resolveRepository(fullRepositoryName: String): Repository? {
         try {
             return runBlocking {
-                val response: GithubResponse = client.get("https://api.github.com/repos/$fullRepositoryName").body()
+                val response: GithubResponse = client
+                    .get("https://api.github.com/repos/$fullRepositoryName")
+                    .body()
                 val repository = Repository(
                     response.fullName,
                     response.description,

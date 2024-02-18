@@ -13,6 +13,7 @@ fun Route.configureBadgeEndpoints() {
     val badgeService: BadgeGenerationService by inject<BadgeGenerationService>()
 
     get("/") {
+        call.response.header("Connection", "keep-alive")
         call.respondTextWriter(contentType = ContentType.parse("image/svg+xml")) {
             val params = call.request.queryParameters
             append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n")

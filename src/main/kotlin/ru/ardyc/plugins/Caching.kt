@@ -10,8 +10,13 @@ fun Application.configureCaching() {
         options { _, content ->
             when (content.contentType?.withoutParameters()) {
                 ContentType.Image.SVG -> CachingOptions(
-                    CacheControl.NoStore(visibility = CacheControl.Visibility.Public)
+                    object : CacheControl(visibility = Visibility.Public) {
+                        override fun toString(): String {
+                            return "no-cache,no-store,public,max-age=0,must-revalidate"
+                        }
+                    }
                 )
+
                 else -> null
             }
         }
