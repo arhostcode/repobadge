@@ -5,7 +5,10 @@ import io.ktor.client.call.*
 import io.ktor.client.engine.jetty.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -30,8 +33,16 @@ class DefaultGithubClient : GithubClient {
     override fun resolveRepository(fullRepositoryName: String): Repository? {
         try {
             return runBlocking {
+                val token = System.getenv("GITHUB_TOKEN")
+
                 val response: GithubResponse = client
-                    .get("https://api.github.com/repos/$fullRepositoryName")
+                    .get("https://api.github.com/repos/$fullRepositoryName") {
+                        headers {
+                            if (token != null) {
+                                append(HttpHeaders.Authorization, "Bearer $token")
+                            }
+                        }
+                    }
                     .body()
                 val repository = Repository(
                     response.fullName,
