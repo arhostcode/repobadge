@@ -39,6 +39,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("io.ktor:ktor-server-caching-headers:$ktor_version")
     implementation("io.ktor:ktor-client-jetty:$ktor_version")
     implementation("io.insert-koin:koin-ktor:$ktor_koin_version")
     implementation("com.github.nwillc.ksvg:ksvg:master-SNAPSHOT")

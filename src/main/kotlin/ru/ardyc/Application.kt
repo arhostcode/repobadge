@@ -3,6 +3,7 @@ package ru.ardyc
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import ru.ardyc.plugins.configureCaching
 import ru.ardyc.plugins.configureDependencyInjection
 import ru.ardyc.plugins.configureRouting
 import ru.ardyc.plugins.configureSerialization
@@ -14,6 +15,7 @@ fun main() {
 
 fun Application.module() {
     configureDependencyInjection()
+    configureCaching()
     configureSerialization()
     configureRouting()
 }
