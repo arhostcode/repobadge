@@ -12,30 +12,6 @@ class DefaultRepositoryBadgeGenerator(private val settings: Settings) : Reposito
     override fun generate(repository: Repository, generationStrategy: GenerationStrategy): SVG {
         val svg = SVG.svg(true) {
 
-            style {
-                body = """
-    .fillOpacity {
-      fill: transparent;
-      animation: fadeIn 3s forwards;
-    }
-    
-    .strokeOpacity {
-      stroke: transparent;
-      animation: fadeInStroke 3s forwards;
-    }
-
-    @keyframes fadeIn {
-      from { fill: transparent; }
-      to { fill: ${generationStrategy.textColor}; }
-    }
-    
-    @keyframes fadeInStroke {
-      from { stroke: transparent; }
-      to { stroke: ${generationStrategy.textColor}; }
-    }
-                """.trimIndent()
-            }
-
             height = "100"
             width = "400"
             viewBox = "0 0 400 100"
