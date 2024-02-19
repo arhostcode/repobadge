@@ -7,8 +7,6 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.application.*
-import io.ktor.server.response.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -46,7 +44,7 @@ class DefaultGithubClient : GithubClient {
                     .body()
                 val repository = Repository(
                     response.fullName,
-                    response.description,
+                    response.description ?: "",
                     response.starCount,
                     response.issuesCount,
                     response.watchers,
@@ -63,7 +61,7 @@ class DefaultGithubClient : GithubClient {
     @Serializable
     private data class GithubResponse(
         @SerialName("full_name") val fullName: String,
-        val description: String,
+        val description: String? = null,
         val language: String,
         @SerialName("stargazers_count") val starCount: Int,
         @SerialName("open_issues") val issuesCount: Int,
